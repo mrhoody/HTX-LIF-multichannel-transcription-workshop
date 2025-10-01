@@ -1,0 +1,16 @@
+# Core ML and Audio Processing
+torch>=2.0.0
+openai-whisper>=20230314
+librosa>=0.10.0
+numpy>=1.24.0
+soundfile>=0.12.0
+
+# Speaker Diarization
+pyannote.audio>=3.0.0
+resemblyzer>=0.1.1
+
+# Jupyter Notebook and Visualization
+jupyter>=1.0.0
+ipywidgets>=8.0.0
+matplotlib>=3.7.0
+IPython>=8.0.0
