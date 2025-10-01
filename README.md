@@ -2,6 +2,8 @@
 
 A comprehensive workshop for learning speech-to-text transcription using OpenAI's Whisper model, with focus on multichannel audio processing and speaker diarization techniques.
 
+**✨ This workshop is designed to run in Google Colab - no local installation required! ✨**
+
 ## Purpose
 
 This repository provides hands-on tutorials and examples for:
@@ -14,14 +16,78 @@ This repository provides hands-on tutorials and examples for:
 
 Perfect for researchers, developers, and audio engineers working with audio transcription and analysis tasks.
 
-## Installation
+## Getting Started with Google Colab
 
-### Prerequisites
+### Quick Start (Recommended)
+
+The easiest way to use this workshop is through Google Colab:
+
+1. **Open the notebook in Google Colab:**
+   - Navigate to the `notebooks/` folder in this repository
+   - Click on `whisper_multichannel_tutorial.ipynb`
+   - Click the "Open in Colab" badge at the top of the notebook, OR
+   - Go to [Google Colab](https://colab.research.google.com/)
+   - Select "GitHub" tab
+   - Enter the repository URL: `mrhoody/HTX-LIF-multichannel-transcription-workshop`
+   - Select the `whisper_multichannel_tutorial.ipynb` notebook
+
+2. **Enable GPU acceleration (Recommended):**
+   - In Colab, go to `Runtime` → `Change runtime type`
+   - Select `T4 GPU` or `GPU` as the hardware accelerator
+   - Click `Save`
+   - This will significantly speed up transcription with Whisper
+
+3. **Run the setup cells:**
+   - The notebook includes installation commands for all required packages
+   - Simply run the cells in order - dependencies will be installed automatically
+   - Note: The first run may take a few minutes to install all packages
+
+### Setting up Hugging Face Token (For Speaker Diarization)
+
+To use speaker diarization features with pyannote.audio, you'll need a Hugging Face token:
+
+1. **Create a Hugging Face account** (if you don't have one):
+   - Visit https://huggingface.co/join
+
+2. **Accept model conditions:**
+   - Visit https://huggingface.co/pyannote/speaker-diarization
+   - Click "Agree and access repository"
+
+3. **Create an access token:**
+   - Go to https://huggingface.co/settings/tokens
+   - Click "New token"
+   - Give it a name (e.g., "colab-workshop")
+   - Select "Read" role
+   - Click "Generate"
+   - Copy the token
+
+4. **Set the token in Google Colab:**
+   ```python
+   import os
+   os.environ['HF_TOKEN'] = 'your_token_here'  # Replace with your actual token
+   ```
+   
+   Or use Colab's Secrets feature (recommended):
+   - Click the 🔑 key icon in the left sidebar
+   - Add a new secret named `HF_TOKEN`
+   - Paste your token as the value
+   - Enable notebook access
+   - In your notebook, access it with:
+   ```python
+   from google.colab import userdata
+   os.environ['HF_TOKEN'] = userdata.get('HF_TOKEN')
+   ```
+
+### Local Installation (Alternative)
+
+If you prefer to run the notebook locally instead of using Google Colab:
+
+**Prerequisites:**
 - Python 3.8 or higher
 - pip package manager
 - (Optional) CUDA-compatible GPU for faster processing
 
-### Setup Instructions
+**Setup Instructions:**
 
 1. Clone the repository:
 ```bash
@@ -40,25 +106,14 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-4. (Optional) For pyannote.audio, you may need to accept user conditions for models:
-   - Visit https://huggingface.co/pyannote/speaker-diarization
-   - Accept the user conditions
-   - Create a Hugging Face access token
-   - Set the token as an environment variable: `export HF_TOKEN=your_token_here`
-
-## Usage
-
-### Starting Jupyter Notebook
-
-Launch Jupyter Notebook to access the interactive tutorials:
-
+4. Launch Jupyter Notebook:
 ```bash
 jupyter notebook
 ```
 
-Then navigate to `notebooks/whisper_multichannel_tutorial.ipynb` in your browser.
+5. Navigate to `notebooks/whisper_multichannel_tutorial.ipynb` in your browser
 
-### Tutorial Contents
+## Tutorial Contents
 
 The main tutorial notebook covers:
 
@@ -69,12 +124,21 @@ The main tutorial notebook covers:
 5. **Speaker Diarization**: Identifying and separating different speakers in audio
 6. **Multichannel Processing**: Splitting multichannel audio and transcribing each channel separately
 
-### Example Audio Files
+### Working with Audio Files in Colab
 
-The tutorials work with sample audio files. You can:
-- Use the provided examples in the notebook
-- Record your own audio samples
-- Download sample audio files from public datasets
+The tutorials work with sample audio files. In Google Colab, you can:
+- **Generate synthetic audio** directly in the notebook (examples provided)
+- **Upload your own audio files** using Colab's file upload feature:
+  ```python
+  from google.colab import files
+  uploaded = files.upload()
+  ```
+- **Access files from Google Drive:**
+  ```python
+  from google.colab import drive
+  drive.mount('/content/drive')
+  ```
+- **Download sample audio files** from public datasets or URLs directly in the notebook
 
 ## Project Structure
 
